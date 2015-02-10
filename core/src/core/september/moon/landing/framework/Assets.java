@@ -15,6 +15,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public static final String TAG = Assets.class.getName();
     private AssetManager assetManager;
+    public static final Assets instance = new Assets();
 
     @Override
     public void error(AssetDescriptor asset, Throwable throwable) {

@@ -1,0 +1,26 @@
+
+pack.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+moon
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+
+pack2.png
+size: 512,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cropped
+  rotate: false
+  xy: 2, 2
+  size: 427, 546
+  orig: 427, 546
+  offset: 0, 0
+  index: -1

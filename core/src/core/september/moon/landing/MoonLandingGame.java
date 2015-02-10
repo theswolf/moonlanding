@@ -1,22 +1,24 @@
 package core.september.moon.landing;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
+import core.september.moon.landing.framework.Assets;
+import core.september.moon.landing.framework.GamePreferences;
+import core.september.moon.landing.framework.screen.DirectedGame;
+import core.september.moon.landing.framework.transitions.ScreenTransition;
+import core.september.moon.landing.framework.transitions.ScreenTransitionSlice;
+import core.september.moon.landing.screens.game.GameScreen;
 
-public class MoonLandingGame extends ApplicationAdapter {
+public class MoonLandingGame extends DirectedGame {
 	SpriteBatch batch;
 	Texture img;
 	
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-	}
+
 
     @Override
     public void create () {
@@ -28,11 +30,11 @@ public class MoonLandingGame extends ApplicationAdapter {
 
         // Load preferences for audio settings and start playing music
         GamePreferences.instance.load();
-        AudioManager.instance.play(Assets.instance.music.song01);
+        //AudioManager.instance.play(Assets.instance.music.song01);
 
         // Start game at menu screen
         ScreenTransition transition = ScreenTransitionSlice.init(2, ScreenTransitionSlice.UP_DOWN, 10, Interpolation.pow5Out);
-        setScreen(new MenuScreen(this), transition);
+        setScreen(new GameScreen(this), transition);
     }
 
 	@Override
