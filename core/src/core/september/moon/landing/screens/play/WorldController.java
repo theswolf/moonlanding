@@ -15,7 +15,7 @@
  ******************************************************************************/
 
 
-package core.september.moon.landing.screens.game;
+package core.september.moon.landing.screens.play;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -26,7 +26,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import core.september.moon.landing.framework.CameraHelper;
-import core.september.moon.landing.framework.Constants;
 import core.september.moon.landing.framework.screen.DirectedGame;
 
 
@@ -35,12 +34,12 @@ public class WorldController extends InputAdapter implements Disposable {
 	private static final String TAG = WorldController.class.getName();
 
 	private DirectedGame game;
-	//public Level level;
-	public int lives;
-	public float livesVisual;
+	public Level level;
+	//public int lives;
+	//public float livesVisual;
 	public int score;
 	public float scoreVisual;
-	private boolean goalReached;
+	//private boolean goalReached;
 	private boolean accelerometerAvailable;
 
 	public CameraHelper cameraHelper;
@@ -61,18 +60,19 @@ public class WorldController extends InputAdapter implements Disposable {
 	private void init () {
 		accelerometerAvailable = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
 		cameraHelper = new CameraHelper();
-		lives = Constants.LIVES_START;
-		livesVisual = lives;
+		//lives = Constants.LIVES_START;
+		//livesVisual = lives;
 		timeLeftGameOverDelay = 0;
 		initLevel();
 	}
 
 	private void initLevel () {
 		score = 0;
-		scoreVisual = score;
-		goalReached = false;
-		//level = new Level(Constants.LEVEL_01);
+		//scoreVisual = score;
+		//goalReached = false;
+		level = new Level();
 		//cameraHelper.setTarget(level.bunnyHead);
+        //cameraHelper.setTarget(level.back);
 		initPhysics();
 	}
 
@@ -99,6 +99,8 @@ public class WorldController extends InputAdapter implements Disposable {
 	}
 
 	public void update (float deltaTime) {
+        level.update(deltaTime);
+        cameraHelper.update(deltaTime);
 		/*handleDebugInput(deltaTime);
 		if (isGameOver() || goalReached) {
 			timeLeftGameOverDelay -= deltaTime;
@@ -124,7 +126,7 @@ public class WorldController extends InputAdapter implements Disposable {
 	}
 
 	public boolean isGameOver () {
-		return lives < 0;
+		return false;
 	}
 
 	public boolean isPlayerInWater () {
@@ -295,14 +297,29 @@ public class WorldController extends InputAdapter implements Disposable {
 			Gdx.app.debug(TAG, "Game world resetted");
 		}
 		// Toggle camera follow
-		else if (keycode == Keys.ENTER) {
-			//cameraHelper.setTarget(cameraHelper.hasTarget() ? null : level.bunnyHead);
+		/*else if (keycode == Keys.ENTER) {
+			cameraHelper.setTarget(cameraHelper.hasTarget() ? null : level.moon);
 			Gdx.app.debug(TAG, "Camera follow enabled: " + cameraHelper.hasTarget());
-		}
+		}*/
 		// Back to Menu
 		else if (keycode == Keys.ESCAPE || keycode == Keys.BACK) {
 			backToMenu();
-		}
+		} else if (keycode == Keys.L) {
+            cameraHelper.setPosition(cameraHelper.getPosition().x+1,cameraHelper.getPosition().y);
+        }
+        else if(keycode == Keys.R) {
+            cameraHelper.setPosition(cameraHelper.getPosition().x-1,cameraHelper.getPosition().y);
+        }
+        else if(keycode == Keys.U) {
+            cameraHelper.setPosition(cameraHelper.getPosition().x,cameraHelper.getPosition().y+1);
+        }
+        else if(keycode == Keys.D) {
+            cameraHelper.setPosition(cameraHelper.getPosition().x,cameraHelper.getPosition().y-1);
+        } else if (keycode == Keys.Z) {
+            cameraHelper.setZoom(cameraHelper.getZoom()+1);
+        } else if (keycode == Keys.X){
+            cameraHelper.setZoom(cameraHelper.getZoom()-1);
+        }
 		return false;
 	}
 

@@ -15,19 +15,13 @@
  ******************************************************************************/
 
 
-package core.september.moon.landing.screens.game;
+package core.september.moon.landing.screens.play;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 import core.september.moon.landing.framework.Constants;
-import core.september.moon.landing.framework.GamePreferences;
 
 public class WorldRenderer implements Disposable {
 
@@ -36,12 +30,12 @@ public class WorldRenderer implements Disposable {
 	private static final boolean DEBUG_DRAW_BOX2D_WORLD = false;
 
 	private OrthographicCamera camera;
-	private OrthographicCamera cameraGUI;
+	//private OrthographicCamera cameraGUI;
 	private SpriteBatch batch;
 	private WorldController worldController;
-	private Box2DDebugRenderer b2debugRenderer;
+	//private Box2DDebugRenderer b2debugRenderer;
 
-	private ShaderProgram shaderMonochrome;
+	//private ShaderProgram shaderMonochrome;
 
 	public WorldRenderer (WorldController worldController) {
 		this.worldController = worldController;
@@ -51,44 +45,44 @@ public class WorldRenderer implements Disposable {
 	private void init () {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
-		camera.position.set(0, 0, 0);
+		camera.position.set(-Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/2, 0);
 		camera.update();
-		cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
+		/*cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
 		cameraGUI.position.set(0, 0, 0);
 		cameraGUI.setToOrtho(true); // flip y-axis
-		cameraGUI.update();
-		b2debugRenderer = new Box2DDebugRenderer();
-		shaderMonochrome = new ShaderProgram(Gdx.files.internal(Constants.shaderMonochromeVertex),
+		cameraGUI.update();*/
+		//b2debugRenderer = new Box2DDebugRenderer();
+		/*shaderMonochrome = new ShaderProgram(Gdx.files.internal(Constants.shaderMonochromeVertex),
 			Gdx.files.internal(Constants.shaderMonochromeFragment));
 		if (!shaderMonochrome.isCompiled()) {
 			String msg = "Could not compile shader program: " + shaderMonochrome.getLog();
 			throw new GdxRuntimeException(msg);
-		}
+		}*/
 	}
 
 	public void render () {
 		renderWorld(batch);
-		renderGui(batch);
+		//renderGui(batch);
 	}
 
 	private void renderWorld (SpriteBatch batch) {
 		worldController.cameraHelper.applyTo(camera);
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		if (GamePreferences.instance.useMonochromeShader) {
+		/*if (GamePreferences.instance.useMonochromeShader) {
 			batch.setShader(shaderMonochrome);
 			shaderMonochrome.setUniformf("u_amount", 1.0f);
-		}
-		//worldController.level.render(batch);
-		batch.setShader(null);
+		}*/
+		worldController.level.render(batch);
+		//batch.setShader(null);
 		batch.end();
-		if (DEBUG_DRAW_BOX2D_WORLD) {
+		/*if (DEBUG_DRAW_BOX2D_WORLD) {
 			b2debugRenderer.render(worldController.b2world, camera.combined);
-		}
+		}*/
 	}
 
 	private void renderGui (SpriteBatch batch) {
-		batch.setProjectionMatrix(cameraGUI.combined);
+		/*batch.setProjectionMatrix(cameraGUI.combined);
 		batch.begin();
 
 		// draw collected gold coins icon + text (anchored to top left edge)
@@ -102,7 +96,7 @@ public class WorldRenderer implements Disposable {
 		// draw game over text
 		renderGuiGameOverMessage(batch);
 
-		batch.end();
+		batch.end();*/
 	}
 
 	private void renderGuiScore (SpriteBatch batch) {
@@ -140,7 +134,7 @@ public class WorldRenderer implements Disposable {
 	}
 
 	private void renderGuiExtraLive (SpriteBatch batch) {
-		float x = cameraGUI.viewportWidth - 50 - Constants.LIVES_START * 50;
+		/*float x = cameraGUI.viewportWidth - 50 - Constants.LIVES_START * 50;
 		float y = -15;
 		for (int i = 0; i < Constants.LIVES_START; i++) {
 			if (worldController.lives <= i) batch.setColor(0.5f, 0.5f, 0.5f, 0.5f);
@@ -155,11 +149,11 @@ public class WorldRenderer implements Disposable {
 			batch.setColor(1.0f, 0.7f, 0.7f, alphaColor);
 			//batch.draw(Assets.instance.bunny.head, x + i * 50, y, 50, 50, 120, 100, alphaScale, -alphaScale, alphaRotate);
 			batch.setColor(1, 1, 1, 1);
-		}
+		}*/
 	}
 
 	private void renderGuiFpsCounter (SpriteBatch batch) {
-		float x = cameraGUI.viewportWidth - 55;
+		/*float x = cameraGUI.viewportWidth - 55;
 		float y = cameraGUI.viewportHeight - 15;
 		int fps = Gdx.graphics.getFramesPerSecond();
 		BitmapFont fpsFont = null;//Assets.instance.fonts.defaultNormal;
@@ -175,33 +169,33 @@ public class WorldRenderer implements Disposable {
 		}
 
 		fpsFont.draw(batch, "FPS: " + fps, x, y);
-		fpsFont.setColor(1, 1, 1, 1); // white
+		fpsFont.setColor(1, 1, 1, 1); // white*/
 	}
 
 	private void renderGuiGameOverMessage (SpriteBatch batch) {
-		float x = cameraGUI.viewportWidth / 2;
+		/*float x = cameraGUI.viewportWidth / 2;
 		float y = cameraGUI.viewportHeight / 2;
 		if (worldController.isGameOver()) {
 			BitmapFont fontGameOver = null;//Assets.instance.fonts.defaultBig;
 			fontGameOver.setColor(1, 0.75f, 0.25f, 1);
 			fontGameOver.drawMultiLine(batch, "GAME OVER", x, y, 1, BitmapFont.HAlignment.CENTER);
 			fontGameOver.setColor(1, 1, 1, 1);
-		}
+		}*/
 	}
 
 	public void resize (int width, int height) {
 		camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / (float)height) * (float)width;
 		camera.update();
-		cameraGUI.viewportHeight = Constants.VIEWPORT_GUI_HEIGHT;
+		/*cameraGUI.viewportHeight = Constants.VIEWPORT_GUI_HEIGHT;
 		cameraGUI.viewportWidth = (Constants.VIEWPORT_GUI_HEIGHT / (float)height) * (float)width;
 		cameraGUI.position.set(cameraGUI.viewportWidth / 2, cameraGUI.viewportHeight / 2, 0);
-		cameraGUI.update();
+		cameraGUI.update();*/
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		shaderMonochrome.dispose();
+		//shaderMonochrome.dispose();
 	}
 
 }

@@ -1,7 +1,9 @@
 package core.september.moon.landing.framework;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -92,5 +94,26 @@ public abstract class AbstractGameObject {
     }
 
     public abstract void render (SpriteBatch batch);
+
+    public void logObject(String TAG, TextureRegion reg,float dimCorrectionX,float dimCorrectionY) {
+        Gdx.app.debug(TAG,"" +
+                "\nposition.x=" +position.x+
+                "\nposition.y=" +position.y+
+                "\norigin.x=" +origin.x+
+                "\norigin.y=" +origin.y+
+                "\ndimension.x=" +dimension.x+
+                "\ndimCorrectionX=" +dimCorrectionX+
+                "\ndimension.y=" +dimension.y+
+                "\ndimCorrectionY=" +dimCorrectionY+
+                "\nscale.x=" +scale.x+
+                "\nscale.y=" +scale.y+
+                "\nrotation=" + rotation+
+                "\nreg.getRegionX()=" +reg.getRegionX()+
+                "\nreg.getRegionY()=" +reg.getRegionY()+
+                "\nreg.getRegionWidth()=" +reg.getRegionWidth()+
+                "\nreg.getRegionHeight()=" +reg.getRegionHeight()+
+                "\nfalse, false" +
+                "\n************************************************");
+    }
 
 }

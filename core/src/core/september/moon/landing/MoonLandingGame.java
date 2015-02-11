@@ -3,8 +3,6 @@ package core.september.moon.landing;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import core.september.moon.landing.framework.Assets;
@@ -12,11 +10,11 @@ import core.september.moon.landing.framework.GamePreferences;
 import core.september.moon.landing.framework.screen.DirectedGame;
 import core.september.moon.landing.framework.transitions.ScreenTransition;
 import core.september.moon.landing.framework.transitions.ScreenTransitionSlice;
-import core.september.moon.landing.screens.game.GameScreen;
+import core.september.moon.landing.screens.play.PlayScreen;
 
 public class MoonLandingGame extends DirectedGame {
 	SpriteBatch batch;
-	Texture img;
+	//Texture img;
 	
 
 
@@ -34,15 +32,9 @@ public class MoonLandingGame extends DirectedGame {
 
         // Start game at menu screen
         ScreenTransition transition = ScreenTransitionSlice.init(2, ScreenTransitionSlice.UP_DOWN, 10, Interpolation.pow5Out);
-        setScreen(new GameScreen(this), transition);
+        //setScreen(new TestScreen(this), null);
+        setScreen(new PlayScreen(this),null);
     }
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
-	}
+
 }

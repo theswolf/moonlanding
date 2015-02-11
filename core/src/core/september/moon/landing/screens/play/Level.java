@@ -1,6 +1,9 @@
-package core.september.moon.landing.screens.game;
+package core.september.moon.landing.screens.play;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import core.september.moon.landing.gameobjects.Back;
+import core.september.moon.landing.gameobjects.Lem;
+import core.september.moon.landing.gameobjects.Moon;
 
 /**
  * Created by christian on 10/02/15.
@@ -9,28 +12,7 @@ public class Level {
 
     public static final String TAG = Level.class.getName();
 
-    public enum BLOCK_TYPE {
-        EMPTY(0, 0, 0), // black
-        GOAL(255, 0, 0), // red
-        ROCK(0, 255, 0), // green
-        PLAYER_SPAWNPOINT(255, 255, 255), // white
-        ITEM_FEATHER(255, 0, 255), // purple
-        ITEM_GOLD_COIN(255, 255, 0); // yellow
 
-        private int color;
-
-        private BLOCK_TYPE (int r, int g, int b) {
-            color = r << 24 | g << 16 | b << 8 | 0xff;
-        }
-
-        public boolean sameColor (int color) {
-            return this.color == color;
-        }
-
-        public int getColor () {
-            return color;
-        }
-    }
 
     // player character
     //public BunnyHead bunnyHead;
@@ -47,11 +29,19 @@ public class Level {
     public WaterOverlay waterOverlay;
     public Goal goal;*/
 
-    public Level (String filename) {
-        init(filename);
+    public Back back;
+    public Lem lem;
+    public Moon moon;
+
+
+
+
+
+    public Level() {
+        init();
     }
 
-    private void init (String filename) {
+    private void init () {
         // player character
       /*  bunnyHead = null;
 
@@ -149,9 +139,22 @@ public class Level {
         // free memory
         pixmap.dispose();
         Gdx.app.debug(TAG, "level '" + filename + "' loaded");*/
+
+        back = new Back();
+        moon = new Moon();
+        lem = new Lem();
+
     }
 
+
+
     public void update (float deltaTime) {
+
+        back.update(deltaTime);
+        moon.update(deltaTime);
+        lem.update(deltaTime);
+
+
         // Bunny Head
        /* bunnyHead.update(deltaTime);
         // Rocks
@@ -170,6 +173,11 @@ public class Level {
     }
 
     public void render (SpriteBatch batch) {
+
+        back.render(batch);
+        //moon.render(batch);
+        //lem.render(batch);
+
         // Draw Mountains
         /*mountains.render(batch);
         // Draw Goal

@@ -4,23 +4,37 @@ size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-moon
+background
+  rotate: false
+  xy: 2, 51
+  size: 480, 800
+  orig: 480, 800
+  offset: 0, 0
+  index: -1
+lem
+  rotate: false
+  xy: 484, 383
+  size: 322, 468
+  orig: 322, 468
+  offset: 0, 0
+  index: -1
+lem-mini
   rotate: false
   xy: 2, 2
-  size: 640, 640
-  orig: 640, 640
+  size: 32, 47
+  orig: 32, 47
   offset: 0, 0
   index: -1
 
 pack2.png
-size: 512,1024
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-cropped
+moon
   rotate: false
   xy: 2, 2
-  size: 427, 546
-  orig: 427, 546
+  size: 542, 542
+  orig: 542, 542
   offset: 0, 0
   index: -1

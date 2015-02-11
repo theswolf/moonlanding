@@ -16,6 +16,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String TAG = Assets.class.getName();
     private AssetManager assetManager;
     public static final Assets instance = new Assets();
+    public AssetLem lem;
+    public AssetBack back;
+    public AssetMoon moon;
+
 
     @Override
     public void error(AssetDescriptor asset, Throwable throwable) {
@@ -66,6 +70,35 @@ public class Assets implements Disposable, AssetErrorListener {
         levelDecoration = new AssetLevelDecoration(atlas);
         sounds = new AssetSounds(assetManager);
         music = new AssetMusic(assetManager);*/
+        lem = new AssetLem(atlas);
+        back = new AssetBack(atlas);
+        moon = new AssetMoon(atlas);
     }
 
+    public class AssetLem {
+        public final TextureAtlas.AtlasRegion module;
+
+
+        public AssetLem (TextureAtlas atlas) {
+            module = atlas.findRegion("lem-mini");
+        }
+    }
+
+    public class AssetBack {
+        public final TextureAtlas.AtlasRegion background;
+
+
+        public AssetBack (TextureAtlas atlas) {
+            background = atlas.findRegion("background");
+        }
+    }
+
+    public class AssetMoon {
+        public final TextureAtlas.AtlasRegion moon;
+
+
+        public AssetMoon (TextureAtlas atlas) {
+            moon = atlas.findRegion("moon");
+        }
+    }
 }
