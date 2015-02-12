@@ -6,23 +6,72 @@ filter: Nearest,Nearest
 repeat: none
 background
   rotate: false
-  xy: 2, 51
+  xy: 2, 134
   size: 480, 800
   orig: 480, 800
   offset: 0, 0
   index: -1
+endBg
+  rotate: false
+  xy: 2, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+endOl
+  rotate: false
+  xy: 484, 400
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 lem
   rotate: false
-  xy: 484, 383
+  xy: 484, 466
   size: 322, 468
   orig: 322, 468
   offset: 0, 0
   index: -1
 lem-mini
   rotate: false
-  xy: 2, 2
+  xy: 808, 821
   size: 32, 47
   orig: 32, 47
+  offset: 0, 0
+  index: -1
+middleBg
+  rotate: false
+  xy: 808, 870
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+middleOl
+  rotate: false
+  xy: 2, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+olAnimation
+  rotate: false
+  xy: 68, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+startBg
+  rotate: false
+  xy: 484, 334
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+startOl
+  rotate: false
+  xy: 550, 400
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 

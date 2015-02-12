@@ -20,6 +20,8 @@ package core.september.moon.landing.screens.play;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import core.september.moon.landing.framework.Constants;
 
@@ -184,13 +186,37 @@ public class WorldRenderer implements Disposable {
 	}
 
 	public void resize (int width, int height) {
-		camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / (float)height) * (float)width;
-		camera.update();
+		//camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / (float)height) * (float)width;
+		//camera.update();
 		/*cameraGUI.viewportHeight = Constants.VIEWPORT_GUI_HEIGHT;
 		cameraGUI.viewportWidth = (Constants.VIEWPORT_GUI_HEIGHT / (float)height) * (float)width;
 		cameraGUI.position.set(cameraGUI.viewportWidth / 2, cameraGUI.viewportHeight / 2, 0);
 		cameraGUI.update();*/
-	}
+        float aspectRatio = (float)width/(float)height;
+        float scale = 1f;
+        Vector2 crop = new Vector2(0f, 0f);
+        if(aspectRatio > Constants.ASPECT_RATIO)
+        {
+            scale = (float)height/(float)Constants.VIEWPORT_HEIGHT;
+            crop.x = (width - Constants.VIEWPORT_WIDTH*scale)/2f;
+        }
+        else if(aspectRatio < Constants.ASPECT_RATIO)
+        {
+            scale = (float)width/(float)Constants.VIEWPORT_WIDTH;
+            crop.y = (height - Constants.VIEWPORT_HEIGHT*scale)/2f;
+        }
+        else
+        {
+            scale = (float)width/(float)Constants.VIEWPORT_WIDTH;
+        }
+
+        float w = (float)Constants.VIEWPORT_WIDTH*scale;
+        float h = (float)Constants.VIEWPORT_HEIGHT*scale;
+        Rectangle viewport = new Rectangle(crop.x, crop.y, w, h);
+        camera.viewportHeight = viewport.height;
+        camera.viewportWidth = viewport.width;
+        //camera.update();
+    }
 
 	@Override
 	public void dispose () {

@@ -13,6 +13,8 @@ public class Constants {
     // GUI Width
     public static final float VIEWPORT_GUI_HEIGHT = 800.0f;
 
+    public static final float ASPECT_RATIO = (float)VIEWPORT_WIDTH/(float)VIEWPORT_HEIGHT;
+
     // GUI Height
     public static final float VIEWPORT_GUI_WIDTH = 480.0f;
 

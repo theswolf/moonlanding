@@ -19,7 +19,15 @@ public class Assets implements Disposable, AssetErrorListener {
     public AssetLem lem;
     public AssetBack back;
     public AssetMoon moon;
+    public AssetLaser laser;
 
+    public final static int LASER_START_BG = 0;
+    public final static int LASER_START_OL = 1;
+    public final static int LASER_MIDDLE_BG = 2;
+    public final static int LASER_MIDDLE_OL = 3;
+    public final static int LASER_END_BG = 4;
+    public final static int LASER_END_OL = 5;
+    public final static int LASER_ANIMATION = 6;
 
     @Override
     public void error(AssetDescriptor asset, Throwable throwable) {
@@ -73,6 +81,7 @@ public class Assets implements Disposable, AssetErrorListener {
         lem = new AssetLem(atlas);
         back = new AssetBack(atlas);
         moon = new AssetMoon(atlas);
+        laser = new AssetLaser(atlas);
     }
 
     public class AssetLem {
@@ -99,6 +108,23 @@ public class Assets implements Disposable, AssetErrorListener {
 
         public AssetMoon (TextureAtlas atlas) {
             moon = atlas.findRegion("moon");
+        }
+    }
+
+
+    public class AssetLaser {
+        public final TextureAtlas.AtlasRegion[] laser;
+
+
+        public AssetLaser (TextureAtlas atlas) {
+            laser = new TextureAtlas.AtlasRegion[7];
+            laser[LASER_START_BG] = atlas.findRegion("startBg");
+            laser[LASER_START_OL] = atlas.findRegion("startOl");
+            laser[LASER_MIDDLE_BG] = atlas.findRegion("middleBg");
+            laser[LASER_MIDDLE_OL] = atlas.findRegion("middleOl");
+            laser[LASER_END_BG] = atlas.findRegion("endBg");
+            laser[LASER_END_OL] = atlas.findRegion("endOl");
+            laser[LASER_ANIMATION] = atlas.findRegion("olAnimation");
         }
     }
 }

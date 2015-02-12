@@ -2,6 +2,7 @@ package core.september.moon.landing.screens.play;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import core.september.moon.landing.gameobjects.Back;
+import core.september.moon.landing.gameobjects.Laser;
 import core.september.moon.landing.gameobjects.Lem;
 import core.september.moon.landing.gameobjects.Moon;
 
@@ -32,6 +33,7 @@ public class Level {
     public Back back;
     public Lem lem;
     public Moon moon;
+    public Laser laser;
 
 
 
@@ -143,6 +145,7 @@ public class Level {
         back = new Back();
         moon = new Moon();
         lem = new Lem();
+        laser = new Laser(lem);
 
     }
 
@@ -153,6 +156,7 @@ public class Level {
         back.update(deltaTime);
         moon.update(deltaTime);
         lem.update(deltaTime);
+        laser.update(deltaTime);
 
 
         // Bunny Head
@@ -176,7 +180,8 @@ public class Level {
 
         back.render(batch);
         //moon.render(batch);
-        //lem.render(batch);
+        lem.render(batch);
+        laser.render(batch);
 
         // Draw Mountains
         /*mountains.render(batch);

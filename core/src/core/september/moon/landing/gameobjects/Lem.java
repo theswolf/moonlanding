@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import core.september.moon.landing.framework.AbstractGameObject;
 import core.september.moon.landing.framework.Assets;
+import core.september.moon.landing.framework.Constants;
 
 /**
  * Created by christian on 11/02/15.
@@ -21,8 +22,8 @@ public class Lem extends AbstractGameObject {
     }
 
     public void init () {
-        dimension.set(480, 800);
-
+        dimension.set(32, 47);
+        position.set(Constants.VIEWPORT_WIDTH/2-32/2,Constants.VIEWPORT_HEIGHT/2-47/2);
         // Center image on game object
         origin.set(dimension.x / 2, dimension.y / 2);
 
@@ -96,8 +97,11 @@ public class Lem extends AbstractGameObject {
                         + dimCorrectionY, scale.x, scale.y, rotation, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(),
                 reg.getRegionHeight(), false, false);
 
+
+        logObject(TAG,reg,0,0);
         // Reset color to white
         batch.setColor(1, 1, 1, 1);
+
     }
 
 

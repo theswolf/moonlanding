@@ -99,7 +99,7 @@ public class Back extends AbstractGameObject {
                 dimension.x + dimCorrectionX, dimension.y
                         + dimCorrectionY, scale.x, scale.y, rotation, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(),
                 reg.getRegionHeight(), false, false);
-        logObject(TAG,reg,dimCorrectionX,dimCorrectionY);
+
         // Reset color to white
         batch.setColor(1, 1, 1, 1);
     }
