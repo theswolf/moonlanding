@@ -26,7 +26,7 @@ public class Laser extends AbstractGameObject{
     public void init (AbstractGameObject parent) {
         this.parent = parent;
         dimension.set(64, 64);
-        position.set(parent.position.x,parent.position.y);
+        position.set(parent.position.x-parent.dimension.x/2,parent.position.y);
         // Center image on game object
         rotation = parent.rotation;
         origin.set(parent.origin.x, parent.origin.y);
@@ -70,13 +70,13 @@ public class Laser extends AbstractGameObject{
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_START_OL],vector,Color.RED,originOffset);
 
         vector.set(dimension.x,dimension.y-0.5f);
-        originOffset.set(position.x,-dimension.y+position.x);
+        originOffset.set(origin.x,origin.y-dimension.y);
         //mid1.setOrigin(start.x, -begin1.getHeight()+start.y);
         drawSprite(batch, Assets.instance.laser.laser[Assets.LASER_MIDDLE_BG], vector, Color.RED,originOffset);
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_MIDDLE_OL],vector,Color.RED,originOffset);
 
         vector.set(dimension.x+vector.x,dimension.y+vector.y);
-        originOffset.set(position.x,-dimension.y*2+position.x);
+        originOffset.set(origin.x,origin.y-dimension.y*2);
 
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_END_BG],vector,Color.RED,originOffset);
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_END_OL],vector,Color.RED,originOffset);

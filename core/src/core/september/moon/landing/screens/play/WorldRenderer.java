@@ -23,6 +23,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import core.september.moon.landing.framework.Constants;
 
 public class WorldRenderer implements Disposable {
@@ -35,6 +37,7 @@ public class WorldRenderer implements Disposable {
 	//private OrthographicCamera cameraGUI;
 	private SpriteBatch batch;
 	private WorldController worldController;
+    private Viewport viewport;
 	//private Box2DDebugRenderer b2debugRenderer;
 
 	//private ShaderProgram shaderMonochrome;
@@ -47,8 +50,10 @@ public class WorldRenderer implements Disposable {
 	private void init () {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
-		camera.position.set(-Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/2, 0);
-		camera.update();
+		//camera.position.set(-Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/2, 0);
+        viewport = new FitViewport(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT,camera);
+        viewport.apply();
+		//camera.update();
 		/*cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
 		cameraGUI.position.set(0, 0, 0);
 		cameraGUI.setToOrtho(true); // flip y-axis
@@ -185,7 +190,12 @@ public class WorldRenderer implements Disposable {
 		}*/
 	}
 
-	public void resize (int width, int height) {
+    public void resize (int width, int height) {
+        viewport.update(width, height);
+    }
+
+
+	public void resizeOld (int width, int height) {
 		//camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / (float)height) * (float)width;
 		//camera.update();
 		/*cameraGUI.viewportHeight = Constants.VIEWPORT_GUI_HEIGHT;
