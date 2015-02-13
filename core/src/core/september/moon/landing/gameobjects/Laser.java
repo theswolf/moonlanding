@@ -14,6 +14,10 @@ public class Laser extends AbstractGameObject{
 
     public final static String TAG = Laser.class.getName();
     private AbstractGameObject parent;
+
+    private final Vector2 vector = new Vector2();
+    private final Vector2 originOffset = new Vector2();
+
     public Laser(AbstractGameObject parent) {
         init(parent);
     }
@@ -60,19 +64,19 @@ public class Laser extends AbstractGameObject{
         reg[Assets.LASER_START_BG] =  Assets.instance.laser.laser[Assets.LASER_START_BG];
         //reg[Assets.LASER_START_BG].getTexture().
 
-        Vector2 vector = new Vector2();
-        Vector2 originOffset = new Vector2();
+        vector.set(0,0);
+        originOffset.set(origin.x,origin.y);
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_START_BG],vector,Color.RED,originOffset);
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_START_OL],vector,Color.RED,originOffset);
 
         vector.set(dimension.x,dimension.y-0.5f);
-        originOffset.set(dimension.x/2,dimension.y/2);
-
+        originOffset.set(position.x,-dimension.y+position.x);
+        //mid1.setOrigin(start.x, -begin1.getHeight()+start.y);
         drawSprite(batch, Assets.instance.laser.laser[Assets.LASER_MIDDLE_BG], vector, Color.RED,originOffset);
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_MIDDLE_OL],vector,Color.RED,originOffset);
 
         vector.set(dimension.x+vector.x,dimension.y+vector.y);
-        originOffset.set(dimension.x,dimension.y);
+        originOffset.set(position.x,-dimension.y*2+position.x);
 
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_END_BG],vector,Color.RED,originOffset);
         drawSprite(batch,Assets.instance.laser.laser[Assets.LASER_END_OL],vector,Color.RED,originOffset);
@@ -94,8 +98,8 @@ public class Laser extends AbstractGameObject{
         batch.draw(region.getTexture(),
                 position.x,
                 position.y+parent.y,
-                origin.x+originOffset.x,
-                origin.y+originOffset.y,
+                originOffset.x,
+                originOffset.y,
                 dimension.x + dimCorrectionX,
                 dimension.y + dimCorrectionY,
                 scale.x,
